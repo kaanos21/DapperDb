@@ -1,6 +1,7 @@
 using DapperNight.Context;
 using DapperNight.Services.CategoryServices;
 using DapperNight.Services.ProductServices;
+using DapperNight.Services.PropertyServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddScoped<DapperContext>();
 // Add services to the container.
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IPropertyService, PropertyService>();
 
 builder.Services.AddControllersWithViews();
 

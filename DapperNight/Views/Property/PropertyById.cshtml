@@ -1,0 +1,67 @@
+﻿@model DapperNight.Dtos.PropertyDtos.ResultPropertyWithImagesDto
+@{
+    Layout = null;
+}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Details</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .carousel-item img {
+            max-height: 500px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Property Details</h1>
+        <div class="row">
+            <div class="col-md-8">
+                <h2>@Model.City</h2>
+                <p><strong>Status:</strong> @Model.Status</p>
+                <p><strong>Price:</strong> @Model.Price</p>
+                <p><strong>Area:</strong> @Model.Area</p>
+                <p><strong>Room Count:</strong> @Model.RoomCount</p>
+                <p><strong>Category ID:</strong> @Model.CategoryId</p>
+            </div>
+            <div class="col-md-4">
+                <!-- Carousel for images -->
+                @if (Model.ImageUrls.Any())
+                {
+                    <div id="propertyCarousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            @for (int i = 0; i < Model.ImageUrls.Count; i++)
+                            {
+                                <div class="carousel-item @(i == 0 ? "active" : "")">
+                                    <img src="@Model.ImageUrls[i]" class="d-block w-100" alt="Property Image">
+                                </div>
+                            }
+                        </div>
+                        <a class="carousel-control-prev" href="#propertyCarousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#propertyCarousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <p>No images available</p>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

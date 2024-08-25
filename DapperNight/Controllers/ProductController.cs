@@ -7,12 +7,10 @@ namespace DapperNight.Controllers
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
-
         public ProductController(IProductService productService)
         {
             _productService = productService;
         }
-
         public async Task<IActionResult> ProductList()
         {
             var values=await _productService.GetAllProductAsync();
@@ -20,7 +18,12 @@ namespace DapperNight.Controllers
         }
         public async Task<IActionResult> ProductListWithCategory()
         {
-            var values= await _productService.GetAllProductAsync();
+            var values = await _productService.GetAllProductsAsync();
+            return View(values);
+        }
+        public async Task<IActionResult> ProductListWithCategoryProcedure()
+        {
+            var values=await _productService.GetAllProductWithCategoryProcAsync();
             return View(values);
         }
         [HttpGet]
@@ -49,6 +52,12 @@ namespace DapperNight.Controllers
         {
             await _productService.UpdateProductAsync(product);
             return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> ProductCount()
+        {
+            int value=await _productService.GetProductCountAsync();
+            ViewBag.a=value;
+            return View();
         }
     }
 }
