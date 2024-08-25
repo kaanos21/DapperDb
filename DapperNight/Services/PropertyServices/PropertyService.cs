@@ -37,6 +37,8 @@ namespace DapperNight.Services.PropertyServices
                     return null;
                 }
 
+
+
                 var images = result.Select(x => x.ImageUrl).ToList();
 
                 return new ResultPropertyWithImagesDto
